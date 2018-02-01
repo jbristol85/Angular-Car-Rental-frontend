@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="joshRentals">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Angular Car Rental</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="app.js"></script>
+
+</head>
+
+<body ng-controller="RentalController as rental">
+	<h1 class="text-center">Josh's Car Rental</h1>
+	<div class="text-center" ng-repeat="product in rental.products">
+		<img ng-src="{{product.image}}">
+		<h2>{{product.type}}</h2>
+		<div ng-show="product.canRent">
+			<h3>{{product.make}} {{product.model}}</h3>
+			<p>{{product.description}}</p>
+			<h4>{{product.price | currency}} per day</h4>
+			<button ng-show="product.canRent" ng-controller="RentController as rentCtrl" ng-click="rentCtrl.rentedCar(product)">Rent Now</button>
+		</div>
+		<h2 ng-hide="product.canRent">Unavailable</h2>
+	</div>
+</body>
+
+</html>
